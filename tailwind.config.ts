@@ -57,6 +57,23 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        success: {
+          DEFAULT: "hsl(120 50% 50%)",
+          foreground: "hsl(0 0% 98%)",
+        },
+        warning: {
+          DEFAULT: "hsl(38 92% 50%)",
+          foreground: "hsl(0 0% 98%)",
+        },
+        danger: {
+          DEFAULT: "hsl(0 84% 60%)",
+          foreground: "hsl(0 0% 98%)",
+        },
+        neural: {
+          DEFAULT: "hsl(263 70% 50%)",
+          light: "hsl(263 70% 60%)",
+          dark: "hsl(263 70% 40%)",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
