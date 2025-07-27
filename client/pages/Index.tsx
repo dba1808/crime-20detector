@@ -1,18 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { 
-  Shield, 
-  AlertTriangle, 
-  CheckCircle, 
-  BarChart3, 
-  Brain, 
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Shield,
+  AlertTriangle,
+  CheckCircle,
+  BarChart3,
+  Brain,
   Zap,
   Eye,
   Search,
@@ -28,12 +40,12 @@ import {
   X,
   ChevronDown,
   TrendingUp,
-  Sparkles
-} from 'lucide-react';
+  Sparkles,
+} from "lucide-react";
 
 interface AnalysisResult {
   text: string;
-  prediction: 'real' | 'fake' | 'suspicious' | 'threat' | 'safe';
+  prediction: "real" | "fake" | "suspicious" | "threat" | "safe";
   confidence: number;
   reasons: string[];
   sentiment: string;
@@ -44,25 +56,81 @@ interface AnalysisResult {
 }
 
 const aiModels = [
-  { id: 'news', name: 'News Authenticity (BERT)', icon: Shield, description: 'Detects fake news and misinformation' },
-  { id: 'crime', name: 'Crime Prediction (RoBERTa)', icon: AlertTriangle, description: 'Predicts criminal intent and behavior' },
-  { id: 'sentiment', name: 'Sentiment Analysis (DistilBERT)', icon: MessageSquare, description: 'Analyzes emotional tone and sentiment' },
-  { id: 'hate', name: 'Hate Speech Detection (ALBERT)', icon: Users, description: 'Identifies hate speech and harassment' },
-  { id: 'cyber', name: 'Cybercrime Analysis (T5)', icon: Lock, description: 'Detects cyber threats and attacks' },
-  { id: 'social', name: 'Social Media Threats (GPT-3.5)', icon: Smartphone, description: 'Monitors social media for threats' }
+  {
+    id: "news",
+    name: "News Authenticity (BERT)",
+    icon: Shield,
+    description: "Detects fake news and misinformation",
+  },
+  {
+    id: "crime",
+    name: "Crime Prediction (RoBERTa)",
+    icon: AlertTriangle,
+    description: "Predicts criminal intent and behavior",
+  },
+  {
+    id: "sentiment",
+    name: "Sentiment Analysis (DistilBERT)",
+    icon: MessageSquare,
+    description: "Analyzes emotional tone and sentiment",
+  },
+  {
+    id: "hate",
+    name: "Hate Speech Detection (ALBERT)",
+    icon: Users,
+    description: "Identifies hate speech and harassment",
+  },
+  {
+    id: "cyber",
+    name: "Cybercrime Analysis (T5)",
+    icon: Lock,
+    description: "Detects cyber threats and attacks",
+  },
+  {
+    id: "social",
+    name: "Social Media Threats (GPT-3.5)",
+    icon: Smartphone,
+    description: "Monitors social media for threats",
+  },
 ];
 
 const realtimeStats = [
-  { icon: Activity, label: "Live Analyses", value: "2,847", change: "+15%", color: "text-blue-500" },
-  { icon: Shield, label: "Threats Blocked", value: "1,203", change: "+8%", color: "text-green-500" },
-  { icon: Brain, label: "AI Models", value: "6", change: "Active", color: "text-purple-500" },
-  { icon: Globe, label: "Global Coverage", value: "24/7", change: "Online", color: "text-orange-500" }
+  {
+    icon: Activity,
+    label: "Live Analyses",
+    value: "2,847",
+    change: "+15%",
+    color: "text-blue-500",
+  },
+  {
+    icon: Shield,
+    label: "Threats Blocked",
+    value: "1,203",
+    change: "+8%",
+    color: "text-green-500",
+  },
+  {
+    icon: Brain,
+    label: "AI Models",
+    value: "6",
+    change: "Active",
+    color: "text-purple-500",
+  },
+  {
+    icon: Globe,
+    label: "Global Coverage",
+    value: "24/7",
+    change: "Online",
+    color: "text-orange-500",
+  },
 ];
 
 export default function Index() {
-  const [inputText, setInputText] = useState('');
-  const [selectedModel, setSelectedModel] = useState('news');
-  const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(null);
+  const [inputText, setInputText] = useState("");
+  const [selectedModel, setSelectedModel] = useState("news");
+  const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(
+    null,
+  );
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [animatedStats, setAnimatedStats] = useState(realtimeStats);
@@ -70,12 +138,18 @@ export default function Index() {
   // Simulate live stats updates
   useEffect(() => {
     const interval = setInterval(() => {
-      setAnimatedStats(prev => prev.map(stat => ({
-        ...stat,
-        value: stat.label === "Live Analyses" 
-          ? (parseInt(stat.value.replace(',', '')) + Math.floor(Math.random() * 10)).toLocaleString()
-          : stat.value
-      })));
+      setAnimatedStats((prev) =>
+        prev.map((stat) => ({
+          ...stat,
+          value:
+            stat.label === "Live Analyses"
+              ? (
+                  parseInt(stat.value.replace(",", "")) +
+                  Math.floor(Math.random() * 10)
+                ).toLocaleString()
+              : stat.value,
+        })),
+      );
     }, 5000);
 
     return () => clearInterval(interval);
@@ -83,83 +157,102 @@ export default function Index() {
 
   const analyzeText = async () => {
     if (!inputText.trim()) return;
-    
-    setIsAnalyzing(true);
-    await new Promise(resolve => setTimeout(resolve, 3000));
-    
-    const isSuspicious = inputText.toLowerCase().includes('urgent') || 
-                        inputText.toLowerCase().includes('breaking') ||
-                        inputText.includes('!!') ||
-                        inputText.toLowerCase().includes('government') ||
-                        inputText.toLowerCase().includes('conspiracy');
-    
-    const isCriminal = inputText.toLowerCase().includes('hack') ||
-                      inputText.toLowerCase().includes('steal') ||
-                      inputText.toLowerCase().includes('threat') ||
-                      inputText.toLowerCase().includes('kill') ||
-                      inputText.toLowerCase().includes('bomb');
 
-    let prediction: AnalysisResult['prediction'] = 'safe';
+    setIsAnalyzing(true);
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+
+    const isSuspicious =
+      inputText.toLowerCase().includes("urgent") ||
+      inputText.toLowerCase().includes("breaking") ||
+      inputText.includes("!!") ||
+      inputText.toLowerCase().includes("government") ||
+      inputText.toLowerCase().includes("conspiracy");
+
+    const isCriminal =
+      inputText.toLowerCase().includes("hack") ||
+      inputText.toLowerCase().includes("steal") ||
+      inputText.toLowerCase().includes("threat") ||
+      inputText.toLowerCase().includes("kill") ||
+      inputText.toLowerCase().includes("bomb");
+
+    let prediction: AnalysisResult["prediction"] = "safe";
     let crimeRisk = Math.floor(Math.random() * 20) + 5;
-    let scenarios: string[] = ['Normal social media activity'];
-    let aiModel = aiModels.find(m => m.id === selectedModel)?.name || 'BERT';
+    let scenarios: string[] = ["Normal social media activity"];
+    let aiModel = aiModels.find((m) => m.id === selectedModel)?.name || "BERT";
 
     if (isCriminal) {
-      prediction = 'threat';
+      prediction = "threat";
       crimeRisk = Math.floor(Math.random() * 30) + 70;
       scenarios = [
-        'Potential cybercrime planning',
-        'Criminal network communication',
-        'Threat assessment required',
-        'Law enforcement notification needed'
+        "Potential cybercrime planning",
+        "Criminal network communication",
+        "Threat assessment required",
+        "Law enforcement notification needed",
       ];
     } else if (isSuspicious) {
-      prediction = selectedModel === 'news' ? 'fake' : 'suspicious';
+      prediction = selectedModel === "news" ? "fake" : "suspicious";
       crimeRisk = Math.floor(Math.random() * 40) + 30;
       scenarios = [
-        'Misinformation spread',
-        'Social manipulation campaign',
-        'Public opinion influence',
-        'Platform moderation review needed'
+        "Misinformation spread",
+        "Social manipulation campaign",
+        "Public opinion influence",
+        "Platform moderation review needed",
       ];
     }
-    
+
     const result: AnalysisResult = {
       text: inputText,
       prediction,
       confidence: Math.floor(Math.random() * 20) + 75,
-      reasons: isCriminal 
-        ? ['Criminal language patterns', 'Threat indicators', 'Behavioral analysis']
-        : isSuspicious 
-        ? ['Sensational language detected', 'Emotional manipulation', 'Urgency markers']
-        : ['Neutral tone', 'Factual structure', 'Credible phrasing'],
-      sentiment: isCriminal ? 'threatening' : isSuspicious ? 'negative' : 'neutral',
-      keyPhrases: inputText.split(' ').slice(0, 3),
+      reasons: isCriminal
+        ? [
+            "Criminal language patterns",
+            "Threat indicators",
+            "Behavioral analysis",
+          ]
+        : isSuspicious
+          ? [
+              "Sensational language detected",
+              "Emotional manipulation",
+              "Urgency markers",
+            ]
+          : ["Neutral tone", "Factual structure", "Credible phrasing"],
+      sentiment: isCriminal
+        ? "threatening"
+        : isSuspicious
+          ? "negative"
+          : "neutral",
+      keyPhrases: inputText.split(" ").slice(0, 3),
       crimeRisk,
       scenarios,
-      aiModel
+      aiModel,
     };
-    
+
     setAnalysisResult(result);
     setIsAnalyzing(false);
   };
 
   const getPredictionColor = (prediction: string) => {
     switch (prediction) {
-      case 'real':
-      case 'safe': return 'bg-green-500/10 border-green-500 text-green-500';
-      case 'fake': return 'bg-red-500/10 border-red-500 text-red-500';
-      case 'threat': return 'bg-red-600/10 border-red-600 text-red-600';
-      case 'suspicious': return 'bg-yellow-500/10 border-yellow-500 text-yellow-500';
-      default: return 'bg-muted/10 border-muted text-muted';
+      case "real":
+      case "safe":
+        return "bg-green-500/10 border-green-500 text-green-500";
+      case "fake":
+        return "bg-red-500/10 border-red-500 text-red-500";
+      case "threat":
+        return "bg-red-600/10 border-red-600 text-red-600";
+      case "suspicious":
+        return "bg-yellow-500/10 border-yellow-500 text-yellow-500";
+      default:
+        return "bg-muted/10 border-muted text-muted";
     }
   };
 
   const getRiskColor = (risk: number) => {
-    if (risk >= 70) return 'bg-red-600/10 border-red-600 text-red-600';
-    if (risk >= 40) return 'bg-yellow-500/10 border-yellow-500 text-yellow-500';
-    if (risk >= 20) return 'bg-blue-500/10 border-blue-500 text-blue-500';
-    return 'bg-green-500/10 border-green-500 text-green-500';
+    if (risk >= 70) return "bg-red-600/10 border-red-600 text-red-600";
+    if (risk >= 40) return "bg-yellow-500/10 border-yellow-500 text-yellow-500";
+    if (risk >= 20) return "bg-blue-500/10 border-blue-500 text-blue-500";
+    return "bg-green-500/10 border-green-500 text-green-500";
   };
 
   return (
@@ -179,7 +272,7 @@ export default function Index() {
       </div>
 
       {/* Header */}
-      <motion.header 
+      <motion.header
         className="border-b border-border/50 backdrop-blur-sm relative z-10 sticky top-0"
         initial={{ y: -50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -187,18 +280,18 @@ export default function Index() {
       >
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <motion.div 
+            <motion.div
               className="flex items-center space-x-3"
               initial={{ x: -20, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <motion.div 
+              <motion.div
                 className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br from-primary to-neural-dark flex items-center justify-center group cursor-pointer"
-                whileHover={{ 
-                  scale: 1.1, 
+                whileHover={{
+                  scale: 1.1,
                   rotate: 5,
-                  boxShadow: "0 10px 30px rgba(139, 92, 246, 0.3)"
+                  boxShadow: "0 10px 30px rgba(139, 92, 246, 0.3)",
                 }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
@@ -206,54 +299,66 @@ export default function Index() {
                 <Shield className="w-5 h-5 sm:w-6 sm:h-6 text-primary-foreground group-hover:drop-shadow-lg transition-all duration-300" />
               </motion.div>
               <div>
-                <h1 className="text-lg sm:text-xl font-bold text-foreground">TruthGuard AI</h1>
-                <p className="text-xs sm:text-sm text-muted-foreground hidden sm:block">Advanced AI Crime & Misinformation Detection</p>
+                <h1 className="text-lg sm:text-xl font-bold text-foreground">
+                  TruthGuard AI
+                </h1>
+                <p className="text-xs sm:text-sm text-muted-foreground hidden sm:block">
+                  Advanced AI Crime & Misinformation Detection
+                </p>
               </div>
             </motion.div>
 
             {/* Desktop Navigation */}
-            <motion.div 
+            <motion.div
               className="hidden lg:flex items-center space-x-6"
               initial={{ x: 20, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
               <nav className="flex items-center space-x-6">
-                <Link to="/" className="text-sm font-medium text-foreground hover:text-primary transition-colors duration-200 relative group">
+                <Link
+                  to="/"
+                  className="text-sm font-medium text-foreground hover:text-primary transition-colors duration-200 relative group"
+                >
                   Home
-                  <motion.div 
+                  <motion.div
                     className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary origin-left"
                     initial={{ scaleX: 1 }}
                     whileHover={{ scaleX: 1.1 }}
                     transition={{ duration: 0.2 }}
                   />
                 </Link>
-                <Link to="/dashboard" className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200 relative group">
+                <Link
+                  to="/dashboard"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200 relative group"
+                >
                   Dashboard
-                  <motion.div 
-                    className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-200"
-                  />
+                  <motion.div className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-200" />
                 </Link>
-                <Link to="/explainable-ai" className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200 relative group">
+                <Link
+                  to="/explainable-ai"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200 relative group"
+                >
                   Explainable AI
-                  <motion.div 
-                    className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-200"
-                  />
+                  <motion.div className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-200" />
                 </Link>
-                <Link to="/crime-analysis" className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200 relative group">
+                <Link
+                  to="/crime-analysis"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200 relative group"
+                >
                   Crime Analysis
-                  <motion.div 
-                    className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-200"
-                  />
+                  <motion.div className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-200" />
                 </Link>
               </nav>
-              <motion.div 
+              <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Badge variant="outline" className="bg-neural/10 border-neural text-neural hover:bg-neural/20 transition-all duration-200 cursor-pointer">
-                  <Brain className="w-3 h-3 mr-1" />
-                  6 AI Models
+                <Badge
+                  variant="outline"
+                  className="bg-neural/10 border-neural text-neural hover:bg-neural/20 transition-all duration-200 cursor-pointer"
+                >
+                  <Brain className="w-3 h-3 mr-1" />6 AI Models
                 </Badge>
               </motion.div>
             </motion.div>
@@ -296,7 +401,7 @@ export default function Index() {
             {mobileMenuOpen && (
               <motion.div
                 initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
+                animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}
                 transition={{ duration: 0.3 }}
                 className="lg:hidden mt-4 pb-4 border-t border-border/50"
@@ -306,7 +411,7 @@ export default function Index() {
                     { to: "/", label: "Home" },
                     { to: "/dashboard", label: "Dashboard" },
                     { to: "/explainable-ai", label: "Explainable AI" },
-                    { to: "/crime-analysis", label: "Crime Analysis" }
+                    { to: "/crime-analysis", label: "Crime Analysis" },
                   ].map((link, index) => (
                     <motion.div
                       key={link.to}
@@ -314,8 +419,8 @@ export default function Index() {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.2, delay: index * 0.1 }}
                     >
-                      <Link 
-                        to={link.to} 
+                      <Link
+                        to={link.to}
                         className="block px-4 py-2 text-sm rounded-lg hover:bg-muted/20 transition-colors duration-200"
                         onClick={() => setMobileMenuOpen(false)}
                       >
@@ -332,13 +437,13 @@ export default function Index() {
 
       <main className="container mx-auto px-4 py-6 sm:py-8 space-y-6 sm:space-y-8 relative z-10">
         {/* Hero Section */}
-        <motion.div 
+        <motion.div
           className="text-center space-y-4 py-8 sm:py-12"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          <motion.h2 
+          <motion.h2
             className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -346,18 +451,19 @@ export default function Index() {
           >
             Multi-Model AI Security Platform
           </motion.h2>
-          <motion.p 
+          <motion.p
             className="text-base sm:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto px-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.8 }}
           >
-            Advanced NLP models for fake news detection, crime prediction, sentiment analysis, and social media threat assessment
+            Advanced NLP models for fake news detection, crime prediction,
+            sentiment analysis, and social media threat assessment
           </motion.p>
         </motion.div>
 
         {/* AI Models Grid */}
-        <motion.div 
+        <motion.div
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-3 sm:gap-4 max-w-7xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -369,34 +475,46 @@ export default function Index() {
             return (
               <motion.div
                 key={model.id}
-                whileHover={{ 
-                  scale: 1.05, 
+                whileHover={{
+                  scale: 1.05,
                   y: -5,
-                  boxShadow: "0 10px 30px rgba(0,0,0,0.1)"
+                  boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
                 }}
                 whileTap={{ scale: 0.95 }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: 1.2 + index * 0.1 }}
               >
-                <Card 
+                <Card
                   className={`text-center p-3 sm:p-4 cursor-pointer transition-all duration-300 hover:bg-muted/20 group ${
-                    isSelected ? 'ring-2 ring-primary bg-primary/5' : ''
+                    isSelected ? "ring-2 ring-primary bg-primary/5" : ""
                   }`}
                   onClick={() => setSelectedModel(model.id)}
                 >
                   <div className="flex flex-col items-center space-y-2">
                     <motion.div
                       whileHover={{ rotate: 10 }}
-                      transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 400,
+                        damping: 17,
+                      }}
                     >
-                      <IconComponent className={`w-6 h-6 sm:w-8 sm:h-8 transition-colors duration-300 ${
-                        isSelected ? 'text-primary' : 'text-muted-foreground group-hover:text-primary'
-                      }`} />
+                      <IconComponent
+                        className={`w-6 h-6 sm:w-8 sm:h-8 transition-colors duration-300 ${
+                          isSelected
+                            ? "text-primary"
+                            : "text-muted-foreground group-hover:text-primary"
+                        }`}
+                      />
                     </motion.div>
                     <div>
-                      <p className="text-xs sm:text-sm font-medium text-foreground">{model.name}</p>
-                      <p className="text-xs text-muted-foreground mt-1 hidden sm:block">{model.description}</p>
+                      <p className="text-xs sm:text-sm font-medium text-foreground">
+                        {model.name}
+                      </p>
+                      <p className="text-xs text-muted-foreground mt-1 hidden sm:block">
+                        {model.description}
+                      </p>
                     </div>
                   </div>
                 </Card>
@@ -424,23 +542,27 @@ export default function Index() {
                 <span>Multi-Model AI Analysis</span>
               </CardTitle>
               <CardDescription className="text-sm sm:text-base">
-                Select an AI model and analyze text for authenticity, threats, sentiment, and crime risk
+                Select an AI model and analyze text for authenticity, threats,
+                sentiment, and crime risk
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4 sm:space-y-6 relative">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <label className="text-sm font-medium">AI Model</label>
-                  <Select value={selectedModel} onValueChange={setSelectedModel}>
+                  <Select
+                    value={selectedModel}
+                    onValueChange={setSelectedModel}
+                  >
                     <SelectTrigger className="hover:bg-muted/20 transition-colors duration-200">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      {aiModels.map(model => {
+                      {aiModels.map((model) => {
                         const IconComponent = model.icon;
                         return (
-                          <SelectItem 
-                            key={model.id} 
+                          <SelectItem
+                            key={model.id}
                             value={model.id}
                             className="hover:bg-muted/20 transition-colors duration-200"
                           >
@@ -455,16 +577,16 @@ export default function Index() {
                   </Select>
                 </div>
                 <div className="flex items-end">
-                  <motion.div 
-                    className="w-full"
-                    whileHover={{ scale: 1.02 }}
-                  >
-                    <Badge 
-                      variant="outline" 
+                  <motion.div className="w-full" whileHover={{ scale: 1.02 }}>
+                    <Badge
+                      variant="outline"
                       className="w-full justify-center py-2 bg-gradient-to-r from-primary/10 to-neural/10 border-primary/20 hover:from-primary/20 hover:to-neural/20 transition-all duration-300 cursor-pointer"
                     >
                       <Sparkles className="w-3 h-3 mr-1" />
-                      {aiModels.find(m => m.id === selectedModel)?.description}
+                      {
+                        aiModels.find((m) => m.id === selectedModel)
+                          ?.description
+                      }
                     </Badge>
                   </motion.div>
                 </div>
@@ -477,20 +599,18 @@ export default function Index() {
                   onChange={(e) => setInputText(e.target.value)}
                   className="min-h-[100px] sm:min-h-[120px] resize-none hover:bg-muted/10 focus:bg-muted/20 transition-all duration-200"
                 />
-                <motion.div 
-                  whileHover={{ scale: 1.02 }} 
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   className="w-full"
                 >
-                  <Button 
+                  <Button
                     onClick={analyzeText}
                     disabled={!inputText.trim() || isAnalyzing}
                     className="w-full bg-gradient-to-r from-primary to-neural-dark hover:from-primary/90 hover:to-neural-dark/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 hover:shadow-lg hover:shadow-primary/25 group relative overflow-hidden"
                     size="lg"
                   >
-                    <motion.div
-                      className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"
-                    />
+                    <motion.div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
                     <AnimatePresence mode="wait">
                       {isAnalyzing ? (
                         <motion.div
@@ -503,7 +623,11 @@ export default function Index() {
                           <motion.div
                             className="w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full mr-2"
                             animate={{ rotate: 360 }}
-                            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                            transition={{
+                              duration: 1,
+                              repeat: Infinity,
+                              ease: "linear",
+                            }}
                           />
                           Analyzing with AI...
                         </motion.div>
@@ -539,9 +663,15 @@ export default function Index() {
                         <motion.div
                           initial={{ scale: 0 }}
                           animate={{ scale: 1 }}
-                          transition={{ duration: 0.3, delay: 0.2, type: "spring", stiffness: 400 }}
+                          transition={{
+                            duration: 0.3,
+                            delay: 0.2,
+                            type: "spring",
+                            stiffness: 400,
+                          }}
                         >
-                          {analysisResult.prediction === 'real' || analysisResult.prediction === 'safe' ? (
+                          {analysisResult.prediction === "real" ||
+                          analysisResult.prediction === "safe" ? (
                             <CheckCircle className="w-6 h-6 text-green-500 drop-shadow-lg" />
                           ) : (
                             <AlertTriangle className="w-6 h-6 text-red-500 drop-shadow-lg" />
@@ -549,19 +679,31 @@ export default function Index() {
                         </motion.div>
                         <div>
                           <h3 className="font-semibold text-foreground text-sm sm:text-base">
-                            Prediction: {analysisResult.prediction.toUpperCase()}
+                            Prediction:{" "}
+                            {analysisResult.prediction.toUpperCase()}
                           </h3>
                           <p className="text-xs sm:text-sm text-muted-foreground">
-                            Model: {analysisResult.aiModel} • Confidence: {analysisResult.confidence}%
+                            Model: {analysisResult.aiModel} • Confidence:{" "}
+                            {analysisResult.confidence}%
                           </p>
                         </div>
                       </div>
                       <motion.div
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
-                        transition={{ duration: 0.3, delay: 0.3, type: "spring", stiffness: 400 }}
+                        transition={{
+                          duration: 0.3,
+                          delay: 0.3,
+                          type: "spring",
+                          stiffness: 400,
+                        }}
                       >
-                        <Badge variant="outline" className={getPredictionColor(analysisResult.prediction)}>
+                        <Badge
+                          variant="outline"
+                          className={getPredictionColor(
+                            analysisResult.prediction,
+                          )}
+                        >
                           {analysisResult.prediction}
                         </Badge>
                       </motion.div>
@@ -569,10 +711,13 @@ export default function Index() {
 
                     <motion.div
                       initial={{ width: 0 }}
-                      animate={{ width: '100%' }}
+                      animate={{ width: "100%" }}
                       transition={{ duration: 0.8, delay: 0.4 }}
                     >
-                      <Progress value={analysisResult.confidence} className="h-2 sm:h-3" />
+                      <Progress
+                        value={analysisResult.confidence}
+                        className="h-2 sm:h-3"
+                      />
                     </motion.div>
 
                     {/* Crime Risk Assessment */}
@@ -588,11 +733,17 @@ export default function Index() {
                             <Gauge className="w-4 h-4 mr-1" />
                             Crime Risk Assessment
                           </h4>
-                          <Badge variant="outline" className={getRiskColor(analysisResult.crimeRisk)}>
+                          <Badge
+                            variant="outline"
+                            className={getRiskColor(analysisResult.crimeRisk)}
+                          >
                             {analysisResult.crimeRisk}% Risk
                           </Badge>
                         </div>
-                        <Progress value={analysisResult.crimeRisk} className="h-2" />
+                        <Progress
+                          value={analysisResult.crimeRisk}
+                          className="h-2"
+                        />
                       </motion.div>
                     )}
 
@@ -608,12 +759,15 @@ export default function Index() {
                         </h4>
                         <ul className="space-y-1">
                           {analysisResult.reasons.map((reason, index) => (
-                            <motion.li 
-                              key={index} 
+                            <motion.li
+                              key={index}
                               className="text-xs sm:text-sm text-muted-foreground flex items-center"
                               initial={{ opacity: 0, x: -10 }}
                               animate={{ opacity: 1, x: 0 }}
-                              transition={{ duration: 0.3, delay: 0.8 + index * 0.1 }}
+                              transition={{
+                                duration: 0.3,
+                                delay: 0.8 + index * 0.1,
+                              }}
                             >
                               <div className="w-1 h-1 bg-primary rounded-full mr-2 flex-shrink-0" />
                               {reason}
@@ -621,23 +775,33 @@ export default function Index() {
                           ))}
                         </ul>
                       </motion.div>
-                      
+
                       <motion.div
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.4, delay: 0.8 }}
                       >
-                        <h4 className="font-medium text-foreground mb-2 text-sm sm:text-base">Key Phrases</h4>
+                        <h4 className="font-medium text-foreground mb-2 text-sm sm:text-base">
+                          Key Phrases
+                        </h4>
                         <div className="flex flex-wrap gap-1">
                           {analysisResult.keyPhrases.map((phrase, index) => (
                             <motion.div
                               key={index}
                               initial={{ opacity: 0, scale: 0 }}
                               animate={{ opacity: 1, scale: 1 }}
-                              transition={{ duration: 0.3, delay: 0.9 + index * 0.1, type: "spring", stiffness: 400 }}
+                              transition={{
+                                duration: 0.3,
+                                delay: 0.9 + index * 0.1,
+                                type: "spring",
+                                stiffness: 400,
+                              }}
                               whileHover={{ scale: 1.1 }}
                             >
-                              <Badge variant="secondary" className="text-xs hover:bg-secondary/80 transition-colors duration-200 cursor-pointer">
+                              <Badge
+                                variant="secondary"
+                                className="text-xs hover:bg-secondary/80 transition-colors duration-200 cursor-pointer"
+                              >
                                 {phrase}
                               </Badge>
                             </motion.div>
@@ -660,12 +824,15 @@ export default function Index() {
                         </h4>
                         <ul className="space-y-1">
                           {analysisResult.scenarios.map((scenario, index) => (
-                            <motion.li 
-                              key={index} 
+                            <motion.li
+                              key={index}
                               className="text-xs sm:text-sm text-muted-foreground flex items-start"
                               initial={{ opacity: 0, x: -10 }}
                               animate={{ opacity: 1, x: 0 }}
-                              transition={{ duration: 0.3, delay: 1.1 + index * 0.1 }}
+                              transition={{
+                                duration: 0.3,
+                                delay: 1.1 + index * 0.1,
+                              }}
                             >
                               <div className="w-2 h-2 bg-gradient-to-r from-primary to-neural rounded-full mr-2 mt-1 flex-shrink-0" />
                               {scenario}
@@ -682,7 +849,7 @@ export default function Index() {
         </motion.div>
 
         {/* Live Stats with enhanced animations */}
-        <motion.div 
+        <motion.div
           className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 max-w-5xl mx-auto"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -693,10 +860,10 @@ export default function Index() {
             return (
               <motion.div
                 key={index}
-                whileHover={{ 
-                  scale: 1.05, 
+                whileHover={{
+                  scale: 1.05,
                   y: -5,
-                  boxShadow: "0 10px 30px rgba(0,0,0,0.1)"
+                  boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
                 }}
                 whileTap={{ scale: 0.95 }}
                 initial={{ opacity: 0, y: 20 }}
@@ -705,13 +872,13 @@ export default function Index() {
               >
                 <Card className="text-center p-3 sm:p-4 hover:bg-muted/10 transition-all duration-300 group cursor-pointer">
                   <CardContent className="p-0">
-                    <motion.div 
+                    <motion.div
                       className={`mb-2 flex justify-center ${stat.color} group-hover:scale-110 transition-transform duration-300`}
                       whileHover={{ rotate: 5 }}
                     >
                       <IconComponent className="w-5 h-5 sm:w-6 sm:h-6 drop-shadow-lg" />
                     </motion.div>
-                    <motion.div 
+                    <motion.div
                       className="text-xl sm:text-2xl font-bold text-foreground"
                       key={stat.value}
                       initial={{ scale: 0.8, opacity: 0 }}
@@ -720,8 +887,12 @@ export default function Index() {
                     >
                       {stat.value}
                     </motion.div>
-                    <div className="text-xs text-muted-foreground">{stat.label}</div>
-                    <div className="text-xs text-green-500 mt-1 font-medium">{stat.change}</div>
+                    <div className="text-xs text-muted-foreground">
+                      {stat.label}
+                    </div>
+                    <div className="text-xs text-green-500 mt-1 font-medium">
+                      {stat.change}
+                    </div>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -730,38 +901,39 @@ export default function Index() {
         </motion.div>
 
         {/* Quick Access with enhanced hover effects */}
-        <motion.div 
+        <motion.div
           className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.6 }}
         >
-          <motion.div 
-            whileHover={{ 
-              scale: 1.02, 
+          <motion.div
+            whileHover={{
+              scale: 1.02,
               y: -5,
-              boxShadow: "0 20px 40px rgba(139, 92, 246, 0.15)"
-            }} 
+              boxShadow: "0 20px 40px rgba(139, 92, 246, 0.15)",
+            }}
             whileTap={{ scale: 0.98 }}
           >
             <Card className="bg-gradient-to-br from-neural/10 to-primary/10 border-neural/20 overflow-hidden relative group cursor-pointer">
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-neural/10 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              />
+              <motion.div className="absolute inset-0 bg-gradient-to-r from-neural/10 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <CardContent className="p-4 sm:p-6 relative">
                 <div className="flex items-center justify-between">
                   <div className="flex-1">
-                    <h3 className="font-semibold text-foreground mb-1 text-sm sm:text-base">Analytics Dashboard</h3>
+                    <h3 className="font-semibold text-foreground mb-1 text-sm sm:text-base">
+                      Analytics Dashboard
+                    </h3>
                     <p className="text-xs sm:text-sm text-muted-foreground mb-4">
-                      View detailed model performance metrics, confusion matrices, and real-time monitoring
+                      View detailed model performance metrics, confusion
+                      matrices, and real-time monitoring
                     </p>
                     <Link to="/dashboard">
                       <motion.div
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                       >
-                        <Button 
-                          variant="outline" 
+                        <Button
+                          variant="outline"
                           className="border-neural/40 hover:bg-neural/20 hover:border-neural/60 transition-all duration-300 group/btn"
                           size="sm"
                         >
@@ -783,32 +955,33 @@ export default function Index() {
             </Card>
           </motion.div>
 
-          <motion.div 
-            whileHover={{ 
-              scale: 1.02, 
+          <motion.div
+            whileHover={{
+              scale: 1.02,
               y: -5,
-              boxShadow: "0 20px 40px rgba(139, 92, 246, 0.15)"
-            }} 
+              boxShadow: "0 20px 40px rgba(139, 92, 246, 0.15)",
+            }}
             whileTap={{ scale: 0.98 }}
           >
             <Card className="bg-gradient-to-br from-primary/10 to-neural/10 border-primary/20 overflow-hidden relative group cursor-pointer">
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-primary/10 to-neural/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              />
+              <motion.div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-neural/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <CardContent className="p-4 sm:p-6 relative">
                 <div className="flex items-center justify-between">
                   <div className="flex-1">
-                    <h3 className="font-semibold text-foreground mb-1 text-sm sm:text-base">Explainable AI</h3>
+                    <h3 className="font-semibold text-foreground mb-1 text-sm sm:text-base">
+                      Explainable AI
+                    </h3>
                     <p className="text-xs sm:text-sm text-muted-foreground mb-4">
-                      Understand model decisions with SHAP, LIME, and feature importance analysis
+                      Understand model decisions with SHAP, LIME, and feature
+                      importance analysis
                     </p>
                     <Link to="/explainable-ai">
                       <motion.div
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                       >
-                        <Button 
-                          variant="outline" 
+                        <Button
+                          variant="outline"
                           className="border-primary/40 hover:bg-primary/20 hover:border-primary/60 transition-all duration-300 group/btn"
                           size="sm"
                         >
@@ -833,20 +1006,20 @@ export default function Index() {
       </main>
 
       {/* Enhanced Footer */}
-      <motion.footer 
+      <motion.footer
         className="border-t border-border/50 mt-12 sm:mt-16 relative z-10 bg-background/50 backdrop-blur-sm"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 2.5 }}
       >
         <div className="container mx-auto px-4 py-6 sm:py-8 text-center text-muted-foreground">
-          <motion.p 
+          <motion.p
             className="text-sm sm:text-base"
             whileHover={{ scale: 1.05 }}
           >
             TruthGuard AI - Advanced Multi-Model AI Security Platform
           </motion.p>
-          <motion.p 
+          <motion.p
             className="text-xs sm:text-sm mt-2"
             whileHover={{ scale: 1.05 }}
           >

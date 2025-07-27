@@ -1,36 +1,78 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { 
-  BarChart3, 
-  PieChart, 
-  TrendingUp, 
+import React from "react";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  BarChart3,
+  PieChart,
+  TrendingUp,
   Activity,
   Target,
   AlertTriangle,
   CheckCircle,
-  Clock
-} from 'lucide-react';
+  Clock,
+} from "lucide-react";
 
 const confusionMatrix = [
   [850, 45],
-  [32, 873]
+  [32, 873],
 ];
 
 const classificationReport = [
-  { label: 'Real News', precision: 0.964, recall: 0.965, f1: 0.964, support: 895 },
-  { label: 'Fake News', precision: 0.951, recall: 0.950, f1: 0.951, support: 905 },
+  {
+    label: "Real News",
+    precision: 0.964,
+    recall: 0.965,
+    f1: 0.964,
+    support: 895,
+  },
+  {
+    label: "Fake News",
+    precision: 0.951,
+    recall: 0.95,
+    f1: 0.951,
+    support: 905,
+  },
 ];
 
 const recentPredictions = [
-  { id: 1, text: "Climate change report shows record temperatures...", prediction: "real", confidence: 94, timestamp: "2024-01-15 14:30" },
-  { id: 2, text: "SHOCKING: Celebrity scandal rocks entertainment...", prediction: "fake", confidence: 87, timestamp: "2024-01-15 14:25" },
-  { id: 3, text: "New medical breakthrough announced by researchers...", prediction: "real", confidence: 91, timestamp: "2024-01-15 14:20" },
-  { id: 4, text: "URGENT: Government conspiracy revealed!!!", prediction: "fake", confidence: 96, timestamp: "2024-01-15 14:15" },
+  {
+    id: 1,
+    text: "Climate change report shows record temperatures...",
+    prediction: "real",
+    confidence: 94,
+    timestamp: "2024-01-15 14:30",
+  },
+  {
+    id: 2,
+    text: "SHOCKING: Celebrity scandal rocks entertainment...",
+    prediction: "fake",
+    confidence: 87,
+    timestamp: "2024-01-15 14:25",
+  },
+  {
+    id: 3,
+    text: "New medical breakthrough announced by researchers...",
+    prediction: "real",
+    confidence: 91,
+    timestamp: "2024-01-15 14:20",
+  },
+  {
+    id: 4,
+    text: "URGENT: Government conspiracy revealed!!!",
+    prediction: "fake",
+    confidence: 96,
+    timestamp: "2024-01-15 14:15",
+  },
 ];
 
 export default function Dashboard() {
@@ -60,22 +102,38 @@ export default function Dashboard() {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold text-foreground">Analytics Dashboard</h1>
-              <p className="text-muted-foreground">Model performance and real-time monitoring</p>
+              <h1 className="text-2xl font-bold text-foreground">
+                Analytics Dashboard
+              </h1>
+              <p className="text-muted-foreground">
+                Model performance and real-time monitoring
+              </p>
             </div>
             <div className="flex items-center space-x-4">
               <nav className="hidden md:flex items-center space-x-6">
-                <Link to="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                <Link
+                  to="/"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
                   Home
                 </Link>
-                <Link to="/dashboard" className="text-sm text-foreground font-medium">
+                <Link
+                  to="/dashboard"
+                  className="text-sm text-foreground font-medium"
+                >
                   Dashboard
                 </Link>
-                <Link to="/explainable-ai" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                <Link
+                  to="/explainable-ai"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
                   Explainable AI
                 </Link>
               </nav>
-              <Badge variant="outline" className="bg-success/10 border-success text-success">
+              <Badge
+                variant="outline"
+                className="bg-success/10 border-success text-success"
+              >
                 <Activity className="w-3 h-3 mr-1" />
                 Live Monitoring
               </Badge>
@@ -91,7 +149,9 @@ export default function Dashboard() {
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-muted-foreground">Total Accuracy</p>
+                  <p className="text-sm text-muted-foreground">
+                    Total Accuracy
+                  </p>
                   <p className="text-3xl font-bold text-foreground">94.2%</p>
                   <p className="text-xs text-success flex items-center mt-1">
                     <TrendingUp className="w-3 h-3 mr-1" />
@@ -107,7 +167,9 @@ export default function Dashboard() {
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-muted-foreground">Predictions Today</p>
+                  <p className="text-sm text-muted-foreground">
+                    Predictions Today
+                  </p>
                   <p className="text-3xl font-bold text-foreground">2,847</p>
                   <p className="text-xs text-warning flex items-center mt-1">
                     <Activity className="w-3 h-3 mr-1" />
@@ -123,7 +185,9 @@ export default function Dashboard() {
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-muted-foreground">Fake News Detected</p>
+                  <p className="text-sm text-muted-foreground">
+                    Fake News Detected
+                  </p>
                   <p className="text-3xl font-bold text-foreground">1,203</p>
                   <p className="text-xs text-danger flex items-center mt-1">
                     <AlertTriangle className="w-3 h-3 mr-1" />
@@ -139,7 +203,9 @@ export default function Dashboard() {
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-muted-foreground">Avg. Confidence</p>
+                  <p className="text-sm text-muted-foreground">
+                    Avg. Confidence
+                  </p>
                   <p className="text-3xl font-bold text-foreground">89.7%</p>
                   <p className="text-xs text-success flex items-center mt-1">
                     <CheckCircle className="w-3 h-3 mr-1" />
@@ -158,7 +224,9 @@ export default function Dashboard() {
             <TabsTrigger value="performance">Model Performance</TabsTrigger>
             <TabsTrigger value="confusion">Confusion Matrix</TabsTrigger>
             <TabsTrigger value="realtime">Real-time Activity</TabsTrigger>
-            <TabsTrigger value="classification">Classification Report</TabsTrigger>
+            <TabsTrigger value="classification">
+              Classification Report
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="performance" className="space-y-6">
@@ -166,7 +234,9 @@ export default function Dashboard() {
               <Card>
                 <CardHeader>
                   <CardTitle>Precision vs Recall</CardTitle>
-                  <CardDescription>Model performance across different confidence thresholds</CardDescription>
+                  <CardDescription>
+                    Model performance across different confidence thresholds
+                  </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-3">
@@ -215,7 +285,9 @@ export default function Dashboard() {
             <Card className="max-w-2xl mx-auto">
               <CardHeader>
                 <CardTitle>Confusion Matrix</CardTitle>
-                <CardDescription>True vs Predicted classifications on test set</CardDescription>
+                <CardDescription>
+                  True vs Predicted classifications on test set
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
@@ -223,25 +295,41 @@ export default function Dashboard() {
                     <div></div>
                     <div className="font-medium text-sm">Predicted Real</div>
                     <div className="font-medium text-sm">Predicted Fake</div>
-                    
+
                     <div className="font-medium text-sm">Actual Real</div>
                     <div className="p-4 bg-success/20 border border-success rounded-lg">
-                      <div className="text-2xl font-bold text-success">{confusionMatrix[0][0]}</div>
-                      <div className="text-xs text-muted-foreground">True Positive</div>
+                      <div className="text-2xl font-bold text-success">
+                        {confusionMatrix[0][0]}
+                      </div>
+                      <div className="text-xs text-muted-foreground">
+                        True Positive
+                      </div>
                     </div>
                     <div className="p-4 bg-danger/20 border border-danger rounded-lg">
-                      <div className="text-2xl font-bold text-danger">{confusionMatrix[0][1]}</div>
-                      <div className="text-xs text-muted-foreground">False Negative</div>
+                      <div className="text-2xl font-bold text-danger">
+                        {confusionMatrix[0][1]}
+                      </div>
+                      <div className="text-xs text-muted-foreground">
+                        False Negative
+                      </div>
                     </div>
-                    
+
                     <div className="font-medium text-sm">Actual Fake</div>
                     <div className="p-4 bg-danger/20 border border-danger rounded-lg">
-                      <div className="text-2xl font-bold text-danger">{confusionMatrix[1][0]}</div>
-                      <div className="text-xs text-muted-foreground">False Positive</div>
+                      <div className="text-2xl font-bold text-danger">
+                        {confusionMatrix[1][0]}
+                      </div>
+                      <div className="text-xs text-muted-foreground">
+                        False Positive
+                      </div>
                     </div>
                     <div className="p-4 bg-success/20 border border-success rounded-lg">
-                      <div className="text-2xl font-bold text-success">{confusionMatrix[1][1]}</div>
-                      <div className="text-xs text-muted-foreground">True Negative</div>
+                      <div className="text-2xl font-bold text-success">
+                        {confusionMatrix[1][1]}
+                      </div>
+                      <div className="text-xs text-muted-foreground">
+                        True Negative
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -253,27 +341,40 @@ export default function Dashboard() {
             <Card>
               <CardHeader>
                 <CardTitle>Recent Predictions</CardTitle>
-                <CardDescription>Live stream of model predictions</CardDescription>
+                <CardDescription>
+                  Live stream of model predictions
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
                   {recentPredictions.map((prediction) => (
-                    <div key={prediction.id} className="flex items-start justify-between p-3 rounded-lg border border-border/50 bg-card/50">
+                    <div
+                      key={prediction.id}
+                      className="flex items-start justify-between p-3 rounded-lg border border-border/50 bg-card/50"
+                    >
                       <div className="flex-1">
-                        <p className="text-sm text-foreground mb-1">{prediction.text}</p>
+                        <p className="text-sm text-foreground mb-1">
+                          {prediction.text}
+                        </p>
                         <div className="flex items-center space-x-2 text-xs text-muted-foreground">
                           <Clock className="w-3 h-3" />
                           <span>{prediction.timestamp}</span>
                         </div>
                       </div>
                       <div className="flex items-center space-x-2 ml-4">
-                        <Badge 
-                          variant="outline" 
-                          className={prediction.prediction === 'real' ? 'bg-success/10 border-success text-success' : 'bg-danger/10 border-danger text-danger'}
+                        <Badge
+                          variant="outline"
+                          className={
+                            prediction.prediction === "real"
+                              ? "bg-success/10 border-success text-success"
+                              : "bg-danger/10 border-danger text-danger"
+                          }
                         >
                           {prediction.prediction}
                         </Badge>
-                        <span className="text-xs text-muted-foreground">{prediction.confidence}%</span>
+                        <span className="text-xs text-muted-foreground">
+                          {prediction.confidence}%
+                        </span>
                       </div>
                     </div>
                   ))}
@@ -304,9 +405,15 @@ export default function Dashboard() {
                       {classificationReport.map((row, index) => (
                         <tr key={index} className="border-b border-border/50">
                           <td className="py-3 font-medium">{row.label}</td>
-                          <td className="text-right py-3">{(row.precision * 100).toFixed(1)}%</td>
-                          <td className="text-right py-3">{(row.recall * 100).toFixed(1)}%</td>
-                          <td className="text-right py-3">{(row.f1 * 100).toFixed(1)}%</td>
+                          <td className="text-right py-3">
+                            {(row.precision * 100).toFixed(1)}%
+                          </td>
+                          <td className="text-right py-3">
+                            {(row.recall * 100).toFixed(1)}%
+                          </td>
+                          <td className="text-right py-3">
+                            {(row.f1 * 100).toFixed(1)}%
+                          </td>
                           <td className="text-right py-3">{row.support}</td>
                         </tr>
                       ))}

@@ -1,22 +1,29 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Progress } from '@/components/ui/progress';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { 
-  Eye, 
-  Brain, 
-  BarChart3, 
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Eye,
+  Brain,
+  BarChart3,
   Lightbulb,
   Target,
   Zap,
   AlertTriangle,
-  CheckCircle
-} from 'lucide-react';
+  CheckCircle,
+} from "lucide-react";
 
-const sampleText = "BREAKING: Scientists have discovered a revolutionary new technology that can cure all diseases instantly! Government officials are trying to hide this miracle cure from the public. Share this before it gets deleted!";
+const sampleText =
+  "BREAKING: Scientists have discovered a revolutionary new technology that can cure all diseases instantly! Government officials are trying to hide this miracle cure from the public. Share this before it gets deleted!";
 
 const shapValues = [
   { word: "BREAKING:", importance: 0.85, type: "negative" },
@@ -49,18 +56,50 @@ const shapValues = [
   { word: "before", importance: 0.43, type: "negative" },
   { word: "it", importance: 0.08, type: "neutral" },
   { word: "gets", importance: 0.31, type: "negative" },
-  { word: "deleted!", importance: 0.91, type: "negative" }
+  { word: "deleted!", importance: 0.91, type: "negative" },
 ];
 
 const featureImportances = [
-  { feature: "Sensational Language", importance: 0.92, description: "Words like 'BREAKING', 'instantly', 'miracle'" },
-  { feature: "Conspiracy Markers", importance: 0.87, description: "References to government hiding information" },
-  { feature: "Urgency Indicators", importance: 0.83, description: "Phrases like 'before it gets deleted'" },
-  { feature: "Unrealistic Claims", importance: 0.79, description: "Claims about curing 'all diseases'" },
-  { feature: "Call to Action", importance: 0.74, description: "Encouragement to share without verification" },
-  { feature: "Emotional Manipulation", importance: 0.68, description: "Appeal to fear and excitement" },
-  { feature: "Lack of Sources", importance: 0.61, description: "No credible references or citations" },
-  { feature: "Grammatical Patterns", importance: 0.45, description: "Excessive punctuation and capitalization" }
+  {
+    feature: "Sensational Language",
+    importance: 0.92,
+    description: "Words like 'BREAKING', 'instantly', 'miracle'",
+  },
+  {
+    feature: "Conspiracy Markers",
+    importance: 0.87,
+    description: "References to government hiding information",
+  },
+  {
+    feature: "Urgency Indicators",
+    importance: 0.83,
+    description: "Phrases like 'before it gets deleted'",
+  },
+  {
+    feature: "Unrealistic Claims",
+    importance: 0.79,
+    description: "Claims about curing 'all diseases'",
+  },
+  {
+    feature: "Call to Action",
+    importance: 0.74,
+    description: "Encouragement to share without verification",
+  },
+  {
+    feature: "Emotional Manipulation",
+    importance: 0.68,
+    description: "Appeal to fear and excitement",
+  },
+  {
+    feature: "Lack of Sources",
+    importance: 0.61,
+    description: "No credible references or citations",
+  },
+  {
+    feature: "Grammatical Patterns",
+    importance: 0.45,
+    description: "Excessive punctuation and capitalization",
+  },
 ];
 
 const limeExplanation = {
@@ -71,8 +110,8 @@ const limeExplanation = {
     { feature: "Conspiracy language", value: 1, impact: "+0.22" },
     { feature: "Urgency markers", value: 3, impact: "+0.19" },
     { feature: "Scientific credibility", value: 0.2, impact: "-0.15" },
-    { feature: "Source references", value: 0, impact: "+0.12" }
-  ]
+    { feature: "Source references", value: 0, impact: "+0.12" },
+  ],
 };
 
 export default function ExplainableAI() {
@@ -97,22 +136,38 @@ export default function ExplainableAI() {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold text-foreground">Explainable AI</h1>
-              <p className="text-muted-foreground">Understanding model predictions with SHAP and LIME</p>
+              <h1 className="text-2xl font-bold text-foreground">
+                Explainable AI
+              </h1>
+              <p className="text-muted-foreground">
+                Understanding model predictions with SHAP and LIME
+              </p>
             </div>
             <div className="flex items-center space-x-4">
               <nav className="hidden md:flex items-center space-x-6">
-                <Link to="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                <Link
+                  to="/"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
                   Home
                 </Link>
-                <Link to="/dashboard" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                <Link
+                  to="/dashboard"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
                   Dashboard
                 </Link>
-                <Link to="/explainable-ai" className="text-sm text-foreground font-medium">
+                <Link
+                  to="/explainable-ai"
+                  className="text-sm text-foreground font-medium"
+                >
                   Explainable AI
                 </Link>
               </nav>
-              <Badge variant="outline" className="bg-neural/10 border-neural text-neural">
+              <Badge
+                variant="outline"
+                className="bg-neural/10 border-neural text-neural"
+              >
                 <Brain className="w-3 h-3 mr-1" />
                 XAI Module
               </Badge>
@@ -129,7 +184,9 @@ export default function ExplainableAI() {
               <Eye className="w-5 h-5" />
               <span>Sample Text Analysis</span>
             </CardTitle>
-            <CardDescription>Click on words to see their individual impact on the prediction</CardDescription>
+            <CardDescription>
+              Click on words to see their individual impact on the prediction
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
@@ -140,7 +197,7 @@ export default function ExplainableAI() {
                       key={index}
                       onClick={() => setSelectedWord(word.word)}
                       className={`px-1 py-0.5 rounded border transition-colors ${getWordColor(word)} ${
-                        selectedWord === word.word ? 'ring-2 ring-primary' : ''
+                        selectedWord === word.word ? "ring-2 ring-primary" : ""
                       }`}
                       title={`Impact: ${word.importance.toFixed(2)} (${word.type})`}
                     >
@@ -156,20 +213,27 @@ export default function ExplainableAI() {
                     <AlertTriangle className="w-5 h-5 text-danger" />
                     <span className="font-medium">Prediction: FAKE</span>
                   </div>
-                  <Badge variant="outline" className="bg-danger/10 border-danger text-danger">
+                  <Badge
+                    variant="outline"
+                    className="bg-danger/10 border-danger text-danger"
+                  >
                     94% Confidence
                   </Badge>
                 </div>
 
                 {selectedWord && (
                   <div className="p-4 bg-primary/10 border border-primary/20 rounded-lg">
-                    <h4 className="font-medium mb-2">Word Analysis: "{selectedWord}"</h4>
+                    <h4 className="font-medium mb-2">
+                      Word Analysis: "{selectedWord}"
+                    </h4>
                     <p className="text-sm text-muted-foreground">
-                      {shapValues.find(w => w.word === selectedWord)?.type === 'negative' 
-                        ? 'This word increases the likelihood of fake news classification.'
-                        : shapValues.find(w => w.word === selectedWord)?.type === 'positive'
-                        ? 'This word supports real news classification.'
-                        : 'This word has minimal impact on classification.'}
+                      {shapValues.find((w) => w.word === selectedWord)?.type ===
+                      "negative"
+                        ? "This word increases the likelihood of fake news classification."
+                        : shapValues.find((w) => w.word === selectedWord)
+                              ?.type === "positive"
+                          ? "This word supports real news classification."
+                          : "This word has minimal impact on classification."}
                     </p>
                   </div>
                 )}
@@ -179,7 +243,11 @@ export default function ExplainableAI() {
         </Card>
 
         {/* Explanation Methods */}
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="max-w-6xl mx-auto">
+        <Tabs
+          value={activeTab}
+          onValueChange={setActiveTab}
+          className="max-w-6xl mx-auto"
+        >
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="shap">SHAP Analysis</TabsTrigger>
             <TabsTrigger value="lime">LIME Explanation</TabsTrigger>
@@ -194,7 +262,8 @@ export default function ExplainableAI() {
                   <span>SHAP (SHapley Additive exPlanations)</span>
                 </CardTitle>
                 <CardDescription>
-                  Unified measure of feature importance showing how each word contributes to the final prediction
+                  Unified measure of feature importance showing how each word
+                  contributes to the final prediction
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -219,17 +288,25 @@ export default function ExplainableAI() {
                     .slice(0, 10)
                     .map((word, index) => (
                       <div key={index} className="flex items-center space-x-3">
-                        <div className="w-24 text-sm font-mono truncate" title={word.word}>
+                        <div
+                          className="w-24 text-sm font-mono truncate"
+                          title={word.word}
+                        >
                           {word.word}
                         </div>
                         <div className="flex-1">
                           <div className="flex items-center space-x-2">
-                            <div 
+                            <div
                               className={`h-4 rounded ${
-                                word.type === 'negative' ? 'bg-red-500' : 
-                                word.type === 'positive' ? 'bg-green-500' : 'bg-gray-500'
+                                word.type === "negative"
+                                  ? "bg-red-500"
+                                  : word.type === "positive"
+                                    ? "bg-green-500"
+                                    : "bg-gray-500"
                               }`}
-                              style={{ width: `${Math.max(word.importance * 100, 5)}%` }}
+                              style={{
+                                width: `${Math.max(word.importance * 100, 5)}%`,
+                              }}
                             ></div>
                             <span className="text-sm text-muted-foreground min-w-12">
                               {word.importance.toFixed(2)}
@@ -248,7 +325,9 @@ export default function ExplainableAI() {
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
                   <Lightbulb className="w-5 h-5" />
-                  <span>LIME (Local Interpretable Model-agnostic Explanations)</span>
+                  <span>
+                    LIME (Local Interpretable Model-agnostic Explanations)
+                  </span>
                 </CardTitle>
                 <CardDescription>
                   Local linear approximation explaining individual predictions
@@ -267,9 +346,13 @@ export default function ExplainableAI() {
                         {limeExplanation.topFeatures.map((feature, index) => (
                           <div key={index} className="flex justify-between">
                             <span className="text-sm">{feature.feature}</span>
-                            <span className={`text-sm font-mono ${
-                              feature.impact.startsWith('+') ? 'text-red-500' : 'text-green-500'
-                            }`}>
+                            <span
+                              className={`text-sm font-mono ${
+                                feature.impact.startsWith("+")
+                                  ? "text-red-500"
+                                  : "text-green-500"
+                              }`}
+                            >
                               {feature.impact}
                             </span>
                           </div>
@@ -277,7 +360,9 @@ export default function ExplainableAI() {
                         <div className="border-t pt-2 mt-2">
                           <div className="flex justify-between font-medium">
                             <span>Final Prediction</span>
-                            <span className="text-danger">{limeExplanation.confidence.toFixed(2)}</span>
+                            <span className="text-danger">
+                              {limeExplanation.confidence.toFixed(2)}
+                            </span>
                           </div>
                         </div>
                       </div>
@@ -289,7 +374,9 @@ export default function ExplainableAI() {
                         {limeExplanation.topFeatures.map((feature, index) => (
                           <div key={index} className="flex justify-between">
                             <span className="text-sm">{feature.feature}</span>
-                            <span className="text-sm font-mono">{feature.value}</span>
+                            <span className="text-sm font-mono">
+                              {feature.value}
+                            </span>
                           </div>
                         ))}
                       </div>
@@ -299,9 +386,11 @@ export default function ExplainableAI() {
                   <div className="p-4 bg-muted/20 rounded-lg">
                     <h4 className="font-medium mb-2">Interpretation</h4>
                     <p className="text-sm text-muted-foreground">
-                      The model predicts this text as <strong>fake news</strong> with high confidence. 
-                      The strongest indicators are sensational language patterns, conspiracy-style claims, 
-                      and urgency markers typically associated with misinformation campaigns.
+                      The model predicts this text as <strong>fake news</strong>{" "}
+                      with high confidence. The strongest indicators are
+                      sensational language patterns, conspiracy-style claims,
+                      and urgency markers typically associated with
+                      misinformation campaigns.
                     </p>
                   </div>
                 </div>
@@ -325,13 +414,20 @@ export default function ExplainableAI() {
                   {featureImportances.map((feature, index) => (
                     <div key={index} className="space-y-2">
                       <div className="flex items-center justify-between">
-                        <h4 className="font-medium text-sm">{feature.feature}</h4>
+                        <h4 className="font-medium text-sm">
+                          {feature.feature}
+                        </h4>
                         <span className="text-sm text-muted-foreground">
                           {(feature.importance * 100).toFixed(1)}%
                         </span>
                       </div>
-                      <Progress value={feature.importance * 100} className="h-2" />
-                      <p className="text-xs text-muted-foreground">{feature.description}</p>
+                      <Progress
+                        value={feature.importance * 100}
+                        className="h-2"
+                      />
+                      <p className="text-xs text-muted-foreground">
+                        {feature.description}
+                      </p>
                     </div>
                   ))}
                 </div>
