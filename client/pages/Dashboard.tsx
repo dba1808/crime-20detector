@@ -43,10 +43,23 @@ export default function Dashboard() {
               <h1 className="text-2xl font-bold text-foreground">Analytics Dashboard</h1>
               <p className="text-muted-foreground">Model performance and real-time monitoring</p>
             </div>
-            <Badge variant="outline" className="bg-success/10 border-success text-success">
-              <Activity className="w-3 h-3 mr-1" />
-              Live Monitoring
-            </Badge>
+            <div className="flex items-center space-x-4">
+              <nav className="hidden md:flex items-center space-x-6">
+                <Link to="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  Home
+                </Link>
+                <Link to="/dashboard" className="text-sm text-foreground font-medium">
+                  Dashboard
+                </Link>
+                <Link to="/explainable-ai" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  Explainable AI
+                </Link>
+              </nav>
+              <Badge variant="outline" className="bg-success/10 border-success text-success">
+                <Activity className="w-3 h-3 mr-1" />
+                Live Monitoring
+              </Badge>
+            </div>
           </div>
         </div>
       </header>
