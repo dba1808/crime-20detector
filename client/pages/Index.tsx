@@ -104,7 +104,18 @@ export default function Index() {
                 <p className="text-sm text-muted-foreground">Fake News & Social Media Crime Detection</p>
               </div>
             </div>
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-4">
+              <nav className="hidden md:flex items-center space-x-6">
+                <Link to="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  Home
+                </Link>
+                <Link to="/dashboard" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  Dashboard
+                </Link>
+                <Link to="/explainable-ai" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  Explainable AI
+                </Link>
+              </nav>
               <Badge variant="outline" className="bg-neural/10 border-neural">
                 <Brain className="w-3 h-3 mr-1" />
                 BERT/RoBERTa
