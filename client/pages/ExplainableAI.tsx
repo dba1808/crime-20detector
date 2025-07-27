@@ -100,10 +100,23 @@ export default function ExplainableAI() {
               <h1 className="text-2xl font-bold text-foreground">Explainable AI</h1>
               <p className="text-muted-foreground">Understanding model predictions with SHAP and LIME</p>
             </div>
-            <Badge variant="outline" className="bg-neural/10 border-neural text-neural">
-              <Brain className="w-3 h-3 mr-1" />
-              XAI Module
-            </Badge>
+            <div className="flex items-center space-x-4">
+              <nav className="hidden md:flex items-center space-x-6">
+                <Link to="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  Home
+                </Link>
+                <Link to="/dashboard" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  Dashboard
+                </Link>
+                <Link to="/explainable-ai" className="text-sm text-foreground font-medium">
+                  Explainable AI
+                </Link>
+              </nav>
+              <Badge variant="outline" className="bg-neural/10 border-neural text-neural">
+                <Brain className="w-3 h-3 mr-1" />
+                XAI Module
+              </Badge>
+            </div>
           </div>
         </div>
       </header>
