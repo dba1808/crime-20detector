@@ -409,6 +409,49 @@ export default function Index() {
           </TabsContent>
         </Tabs>
 
+        {/* Quick Access */}
+        <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-6">
+          <Card className="bg-gradient-to-br from-neural/10 to-primary/10 border-neural/20">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h3 className="font-semibold text-foreground mb-1">Analytics Dashboard</h3>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    View detailed model performance metrics, confusion matrices, and real-time monitoring
+                  </p>
+                  <Link to="/dashboard">
+                    <Button variant="outline" className="border-neural/40 hover:bg-neural/10">
+                      <BarChart3 className="w-4 h-4 mr-2" />
+                      View Dashboard
+                    </Button>
+                  </Link>
+                </div>
+                <BarChart3 className="w-12 h-12 text-neural/40" />
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gradient-to-br from-primary/10 to-neural/10 border-primary/20">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h3 className="font-semibold text-foreground mb-1">Explainable AI</h3>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Understand model decisions with SHAP, LIME, and feature importance analysis
+                  </p>
+                  <Link to="/explainable-ai">
+                    <Button variant="outline" className="border-primary/40 hover:bg-primary/10">
+                      <Eye className="w-4 h-4 mr-2" />
+                      Explore XAI
+                    </Button>
+                  </Link>
+                </div>
+                <Eye className="w-12 h-12 text-primary/40" />
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
         {/* Recent Analysis Examples */}
         <Card className="max-w-4xl mx-auto">
           <CardHeader>
